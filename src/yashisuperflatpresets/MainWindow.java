@@ -1,6 +1,15 @@
 
 package yashisuperflatpresets;
 
+import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -148,7 +157,7 @@ public class MainWindow extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("雅诗MC超平坦世界个性化预设生成器");
+        setTitle("雅诗MC超平坦世界个性化预设生成器 v0.8");
         setMinimumSize(null);
         setSize(new java.awt.Dimension(800, 498));
 
@@ -246,9 +255,9 @@ public class MainWindow extends javax.swing.JFrame {
         sel_mineshaft.setText("生成废弃矿井");
         sel_mineshaft.setToolTipText("决定废弃矿井能否被生成。");
 
-        jLabel7.setText("稀有度百分比（0-100。默认1%，注意100%通常会导致多个矿道同时生成）：");
+        jLabel7.setText("稀有度百分比（0.0-1.0。默认0.1，注意1.0通常会导致多个矿道同时生成）：");
 
-        num_mineshaft.setText("1");
+        num_mineshaft.setText("0.1");
 
         sel_stronghold.setText("生成要塞");
         sel_stronghold.setToolTipText("决定要塞能否生成。");
@@ -293,11 +302,26 @@ public class MainWindow extends javax.swing.JFrame {
 
         biomeSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "草原" }));
 
-        sel_selectall.setText("全选/反选");
+        sel_selectall.setText("全选/全不选");
+        sel_selectall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sel_selectallActionPerformed(evt);
+            }
+        });
 
         btn_paste.setText("粘贴");
+        btn_paste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pasteActionPerformed(evt);
+            }
+        });
 
         btn_copy.setText("复制");
+        btn_copy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_copyActionPerformed(evt);
+            }
+        });
 
         blockColorSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "普通（白色）" }));
 
@@ -310,7 +334,12 @@ public class MainWindow extends javax.swing.JFrame {
         sel_blockname.setSelected(true);
         sel_blockname.setText("使用名称代替ID");
 
-        jButton1.setText("检查更新");
+        jButton1.setText("帮助/参考资料/检查更新");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -420,16 +449,14 @@ public class MainWindow extends javax.swing.JFrame {
                                         .addComponent(num_mcv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel12)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 37, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(307, 307, 307)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sel_blockname)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(115, 115, 115)
-                                        .addComponent(sel_selectall)))
-                                .addGap(14, 14, 14)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(sel_blockname)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(sel_selectall)
+                                .addGap(45, 45, 45)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -566,7 +593,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void btn_insDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insDActionPerformed
         //在当前选择下方插入
         if (blockSetting.getSelectedIndex() >= 0) {
-            int nowSelectBox = blockSetting.getSelectedIndex();
+            int nowSelectBox = blockSetting.getSelectedIndex() + 1;
             int nowSelectBlock = blockSelect.getSelectedIndex();
 //            if (nowSelectBox < 0) {
 //                nowSelectBox = 0;
@@ -586,12 +613,22 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btn_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delActionPerformed
         //删除当前选择
-        if (blockSetting.getSelectedIndex() >= 0 && tempBlockID.size() > 1) {
+        int nowSelect = blockSetting.getSelectedIndex();
+        if (nowSelect >= 0 && tempBlockID.size() > 1) {
             int nowselect = blockSetting.getSelectedIndex();
             tempBlockID.remove(nowselect);
             tempBlockData.remove(nowselect);
             tempBlockNumber.remove(nowselect);
             blockSettingList.remove(nowselect);
+            if (nowSelect + 1 <= tempBlockID.size()) {
+                blockSetting.setSelectedIndex(nowSelect);
+            }
+            if (nowSelect - 1 >= 0) {
+                blockSetting.setSelectedIndex(nowSelect-1);
+            }
+            if (tempBlockID.size() == 1) {
+                blockSetting.setSelectedIndex(0);
+            }
             btn_delEnable();
         }
     }//GEN-LAST:event_btn_delActionPerformed
@@ -602,8 +639,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_demoPresetSelectActionPerformed
 
     private void btn_code_gActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_code_gActionPerformed
-        System.out.println("生成代码...");
-        String code = "";
+        System.out.println("生成代码开始...");
         ArrayList<String> codeArr = new ArrayList<String>();
         System.out.println("导入版本号设置..." + num_mcv.getText());
         codeArr.add(num_mcv.getText());
@@ -644,7 +680,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         if (sel_mineshaft.isSelected()) {
             String optstr = "mineshaft(chance=" + num_mineshaft.getText() + ")";
-            if ("1".equals(num_mineshaft.getText())) {
+            if ("0.1".equals(num_mineshaft.getText())) {
                 optstr = "mineshaft";
             }
             System.out.println("生成废弃矿井设置..." + optstr);
@@ -698,7 +734,57 @@ public class MainWindow extends javax.swing.JFrame {
         String okstr = arr2str(codeArr,";");
         System.out.println("完成代码生成..." + okstr);
         txt_code.setText(okstr);
+        System.out.println("生成代码完成。");
     }//GEN-LAST:event_btn_code_gActionPerformed
+
+    private void btn_copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_copyActionPerformed
+        StringSelection stringSelection = new StringSelection(txt_code.getText());
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+    }//GEN-LAST:event_btn_copyActionPerformed
+
+    private void btn_pasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pasteActionPerformed
+//        Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+        Transferable t = Toolkit.getDefaultToolkit()  
+                    .getSystemClipboard().getContents(null);  
+            try {  
+                if (t != null  
+                        && t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+                    // 先判断开始取得的可传输的数据是不是文字, 如果是, 取得这些文字 
+                    String s = (String) t.getTransferData(DataFlavor.stringFlavor);  
+                    // 同样, 因为Transferable中的DataFlavor是多种类型的,  
+                    // 所以传入DataFlavor这个参数, 指定要取得哪种类型的Data.  
+                    txt_code.setText(s); 
+                }  
+            } catch (UnsupportedFlavorException ex) {  
+                ex.printStackTrace();  
+            } catch (IOException ex) {  
+                ex.printStackTrace();  
+            }  
+    }//GEN-LAST:event_btn_pasteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            URI uri = new URI("http://yoooooooooo.com/yashi/?p=1632");
+            Desktop.getDesktop().browse(uri);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void sel_selectallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sel_selectallActionPerformed
+        Boolean select = sel_selectall.isSelected();
+        sel_village.setSelected(select);
+        sel_mineshaft.setSelected(select);
+        sel_stronghold.setSelected(select);
+        sel_biome.setSelected(select);
+        sel_dungeon.setSelected(select);
+        sel_decoration.setSelected(select);
+        sel_lake.setSelected(select);
+        sel_lava_lake.setSelected(select);
+        sel_oceanmonument.setSelected(select);
+    }//GEN-LAST:event_sel_selectallActionPerformed
 
     private String arr2str (ArrayList<String> strarr, String breakcher) {
         String str = "";
@@ -730,7 +816,6 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void btn_delEnable() {
         if (tempBlockID.size() > 1) {
-            
             btn_del.setEnabled(true);
         } else {
             btn_del.setEnabled(false);

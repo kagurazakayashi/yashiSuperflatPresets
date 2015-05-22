@@ -24,7 +24,9 @@ public class Datas {
         id1.add("3;minecraft:bedrock,59*minecraft:stone,3*minecraft:dirt,minecraft:grass,minecraft:snow_layer;12;village,biome_1");    id2.add("Snowy Kingdom");    id3.add("雪之国度");
         id1.add("3;2*minecraft:cobblestone,3*minecraft:dirt,minecraft:grass;1;village,biome_1");    id2.add("Bottomless Pit");    id3.add("无底洞");
         id1.add("3;minecraft:bedrock,3*minecraft:stone,52*minecraft:sandstone,8*minecraft:sand;2;village,biome_1,decoration,stronghold,mineshaft,dungeon");    id2.add("Desert");    id3.add("沙漠");
-        id1.add("3;minecraft:bedrock,3*minecraft:stone,52*minecraft:sandstone;2;");    id2.add("Redstone Ready");    id3.add("红石就绪");
+        id1.add("3;minecraft:bedrock,3*minecraft:stone,52*minecraft:sandstone;2");    id2.add("Redstone Ready");    id3.add("红石就绪");
+        id1.add("3;minecraft:wool:10,10*minecraft:wool:14,10*minecraft:wool:4,10*minecraft:wool:13,10*minecraft:wool:6;8;village(size=10 distance=9),mineshaft(chance=1.0),stronghold(count=10 distance=1 spread=10),biome_1(distance=9),dungeon,decoration,lake,lava_lake,oceanmonument");    id2.add("");    id3.add("雅诗:日渐崩坏的世界");
+        id1.add("3;minecraft:barrier;2;village(size=10 distance=9),mineshaft(chance=1.0),stronghold(count=10 distance=1 spread=10),biome_1(distance=9),dungeon,decoration,lake,lava_lake,oceanmonument");    id2.add("");    id3.add("雅诗:虚空悬浮");
         if (id == 1) {
             return id1;
         } else if (id == 2) {
