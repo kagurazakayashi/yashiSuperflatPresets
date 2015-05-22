@@ -1,7 +1,9 @@
 
 package yashisuperflatpresets;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -73,6 +75,15 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
     public MainWindow() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("[yashiSuperflatPresets] KagurazakaYashi.\nCurrent time is " + df.format(new Date())
+        + "'\nSystem.getProperty('os.name') == '" + System.getProperty("os.name")
+        + "'\nSystem.getProperty('os.version') == '" + System.getProperty("os.version")
+        + "'\nSystem.getProperty('os.arch') == '" + System.getProperty("os.arch")
+        + "'\nSystem.getProperty('java.version') == '" + System.getProperty("java.version")
+        + "'\nSystem.getProperty('java.vendor') == '" + System.getProperty("java.vendor")
+        + "'\nSystem.getProperty('sun.arch.data.model') == '" + System.getProperty("sun.arch.data.model")
+        + "'");
         initComponents();
         initData();
     }
@@ -87,11 +98,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txt_code = new javax.swing.JTextField();
+        btn_code_l = new javax.swing.JButton();
+        btn_code_g = new javax.swing.JButton();
         demoPresetSelect = new javax.swing.JComboBox();
-        jButton3 = new javax.swing.JButton();
+        btn_demoPresetSelect = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         blockSetting = new javax.swing.JList();
@@ -100,72 +111,84 @@ public class MainWindow extends javax.swing.JFrame {
         btn_insU = new javax.swing.JButton();
         btn_del = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        sel_village = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        num_village1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        num_village2 = new javax.swing.JTextField();
+        sel_mineshaft = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        num_mineshaft = new javax.swing.JTextField();
+        sel_stronghold = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        num_stronghold1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        num_stronghold2 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jTextField8 = new javax.swing.JTextField();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
+        num_stronghold3 = new javax.swing.JTextField();
+        sel_biome = new javax.swing.JCheckBox();
+        num_biome = new javax.swing.JTextField();
+        sel_dungeon = new javax.swing.JCheckBox();
+        sel_decoration = new javax.swing.JCheckBox();
+        sel_lake = new javax.swing.JCheckBox();
+        sel_lava_lake = new javax.swing.JCheckBox();
+        sel_oceanmonument = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        num_mcv = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         biomeSelect = new javax.swing.JComboBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        sel_selectall = new javax.swing.JCheckBox();
+        btn_paste = new javax.swing.JButton();
+        btn_copy = new javax.swing.JButton();
         blockColorSelect = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txt_block_number = new javax.swing.JTextField();
-        jCheckBox11 = new javax.swing.JCheckBox();
+        sel_blockname = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("雅诗MC超平坦世界个性化预设生成器");
-        setMaximumSize(null);
         setMinimumSize(null);
         setSize(new java.awt.Dimension(800, 498));
 
         jLabel2.setText("将下面的预设方案输入到MC预设框或分享：");
 
-        jTextField1.setText("3;minecraft:bedrock,2*minecraft:dirt,minecraft:grass;1;village");
+        txt_code.setText("3;minecraft:bedrock,2*minecraft:dirt,minecraft:grass;1;village");
 
-        jButton1.setText("↓ 载入方案 ↓");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_code_l.setText("↓ 载入方案 ↓");
+        btn_code_l.setEnabled(false);
+        btn_code_l.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_code_lActionPerformed(evt);
             }
         });
 
-        jButton2.setText("↑ 生成方案 ↑");
+        btn_code_g.setText("↑ 生成方案 ↑");
+        btn_code_g.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_code_gActionPerformed(evt);
+            }
+        });
 
         demoPresetSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "经典平坦" }));
         demoPresetSelect.setToolTipText("");
 
-        jButton3.setText("← 应用预设");
+        btn_demoPresetSelect.setText("← 应用预设");
+        btn_demoPresetSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_demoPresetSelectActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("方块设置");
+        jLabel1.setText("方块设置（从顶端到底端）");
 
         blockSetting.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "草方块x1" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        blockSetting.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(blockSetting);
 
         blockSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "空气" }));
@@ -198,73 +221,83 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel4.setText("生成设置");
 
-        jCheckBox1.setText("生成村庄");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        sel_village.setSelected(true);
+        sel_village.setText("生成村庄");
+        sel_village.setToolTipText("对应生物群系：平原/沙漠/热带草原。决定村庄能否在特定生物群系里被生成。");
+        sel_village.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                sel_villageActionPerformed(evt);
             }
         });
 
         jLabel5.setText("村庄大小（0为普通模式默认，1为超平坦默认，2以上成比例增加）：");
 
-        jTextField2.setText("1");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        num_village1.setText("1");
+        num_village1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                num_village1ActionPerformed(evt);
             }
         });
 
         jLabel6.setText("村庄之间相隔区块数量（最小9，默认32）：");
 
-        jTextField3.setText("32");
+        num_village2.setText("32");
 
-        jCheckBox2.setText("生成废弃矿井");
+        sel_mineshaft.setText("生成废弃矿井");
+        sel_mineshaft.setToolTipText("决定废弃矿井能否被生成。");
 
         jLabel7.setText("稀有度百分比（0-100。默认1%，注意100%通常会导致多个矿道同时生成）：");
 
-        jTextField4.setText("1");
+        num_mineshaft.setText("1");
 
-        jCheckBox3.setText("生成要塞");
+        sel_stronghold.setText("生成要塞");
+        sel_stronghold.setToolTipText("决定要塞能否生成。");
 
         jLabel8.setText("当前世界中生成数量（默认3）：");
 
-        jTextField5.setText("3");
+        num_stronghold1.setText("3");
 
         jLabel9.setText("离出生点和其它要塞的区块数量（最小1，默认32）：");
 
-        jTextField6.setText("32");
+        num_stronghold2.setText("32");
 
         jLabel10.setText("要塞距离其生成点的集中度（最小1，默认3）：");
 
-        jTextField7.setText("3");
+        num_stronghold3.setText("3");
 
-        jCheckBox4.setText("生成生物群系特有建筑（神殿神庙等）  距离（最小9，默认32）：");
+        sel_biome.setText("生成生物群系特有建筑（神殿神庙等）  距离（最小9，默认32）：");
+        sel_biome.setToolTipText("对应生物群系：沙漠（山丘）、丛林（山丘）、沼泽。决定生物群系所特有的结构（沙漠神殿、丛林神庙与沼泽小屋）能否生成。");
 
-        jTextField8.setText("32");
+        num_biome.setText("32");
 
-        jCheckBox5.setText("生成地牢");
+        sel_dungeon.setText("生成地牢");
+        sel_dungeon.setToolTipText("决定地牢能否被生成。");
 
-        jCheckBox6.setText("生成花草树木");
+        sel_decoration.setText("生成花草树木");
+        sel_decoration.setToolTipText("决定树木、草、花、南瓜装饰能否在特定生物群系中，在最上层方块适宜的情况下被生成。亦会将高度适宜的石头层用沙砾、泥土和矿石填充。");
 
-        jCheckBox7.setText("生成湖泊");
+        sel_lake.setText("生成湖泊");
+        sel_lake.setToolTipText("决定湖能否被生成，同时湖周边可能会用沙子和甘蔗装饰。");
 
-        jCheckBox8.setText("生成岩浆");
+        sel_lava_lake.setText("生成岩浆");
+        sel_lava_lake.setToolTipText("决定岩浆湖能否被生成。");
 
-        jCheckBox9.setText("生成海底遗迹");
+        sel_oceanmonument.setText("生成海底遗迹");
+        sel_oceanmonument.setToolTipText("对应生物群系：深海。决定能否在水中生成海底遗迹。");
 
         jLabel11.setText("兼容MC版本：");
 
-        jTextField9.setText("3");
+        num_mcv.setText("3");
 
         jLabel12.setText("生物群系：");
 
         biomeSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "草原" }));
 
-        jCheckBox10.setText("全选/反选");
+        sel_selectall.setText("全选/反选");
 
-        jButton7.setText("粘贴");
+        btn_paste.setText("粘贴");
 
-        jButton8.setText("复制");
+        btn_copy.setText("复制");
 
         blockColorSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "普通（白色）" }));
 
@@ -274,8 +307,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         txt_block_number.setText("1");
 
-        jCheckBox11.setSelected(true);
-        jCheckBox11.setText("使用名称代替ID");
+        sel_blockname.setSelected(true);
+        sel_blockname.setText("使用名称代替ID");
+
+        jButton1.setText("检查更新");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -284,16 +319,18 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
+                    .addComponent(txt_code)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 418, Short.MAX_VALUE)
-                        .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_copy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7))
+                        .addComponent(btn_paste)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_code_l, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1)
                             .addComponent(blockSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
@@ -317,70 +354,70 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btn_code_g, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(demoPresetSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(biomeSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)))
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btn_demoPresetSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox1)
+                                        .addComponent(sel_village)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel6)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(num_village2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel5)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jCheckBox2)
+                                                .addComponent(num_village1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(sel_mineshaft)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jCheckBox3)
+                                                .addComponent(sel_stronghold)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel8)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(num_stronghold1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel9)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(num_stronghold2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabel10)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(num_stronghold3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addGap(21, 21, 21)
                                                 .addComponent(jLabel7)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(num_mineshaft, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox4)
+                                        .addComponent(sel_biome)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(num_biome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox5)
+                                        .addComponent(sel_dungeon)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox6)
+                                        .addComponent(sel_decoration)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox7)
+                                        .addComponent(sel_lake)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox8)
+                                        .addComponent(sel_lava_lake)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox9))
+                                        .addComponent(sel_oceanmonument))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel11)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(num_mcv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel12)))
                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -388,13 +425,10 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addGap(307, 307, 307)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox11)
-                                        .addGap(47, 47, 47)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(sel_blockname)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(115, 115, 115)
-                                        .addComponent(jCheckBox10)))
+                                        .addComponent(sel_selectall)))
                                 .addGap(14, 14, 14)))))
                 .addContainerGap())
         );
@@ -404,72 +438,73 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(btn_paste)
+                    .addComponent(btn_copy)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_code, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btn_code_l)
+                    .addComponent(btn_code_g)
                     .addComponent(demoPresetSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(btn_demoPresetSelect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
-                    .addComponent(jCheckBox10)
-                    .addComponent(jCheckBox11))
+                    .addComponent(sel_selectall)
+                    .addComponent(sel_blockname))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(num_mcv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addComponent(biomeSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
+                            .addComponent(sel_village)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(num_village1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(num_village2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(sel_mineshaft)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(num_mineshaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox3)
+                            .addComponent(sel_stronghold)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(num_stronghold1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(num_stronghold2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(num_stronghold3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox4)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sel_biome)
+                            .addComponent(num_biome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox5)
-                            .addComponent(jCheckBox6)
-                            .addComponent(jCheckBox7)
-                            .addComponent(jCheckBox8)
-                            .addComponent(jCheckBox9))
+                            .addComponent(sel_dungeon)
+                            .addComponent(sel_decoration)
+                            .addComponent(sel_lake)
+                            .addComponent(sel_lava_lake)
+                            .addComponent(sel_oceanmonument))
                         .addGap(76, 76, 76))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(blockSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -493,21 +528,21 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_code_lActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_code_lActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_code_lActionPerformed
 
     private void blockSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockSelectActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_blockSelectActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void sel_villageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sel_villageActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_sel_villageActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void num_village1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num_village1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_num_village1ActionPerformed
 
     private void btn_insUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insUActionPerformed
         //在当前选择上方插入
@@ -561,6 +596,138 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_delActionPerformed
 
+    private void btn_demoPresetSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demoPresetSelectActionPerformed
+        //应用预设
+        txt_code.setText(demoPresetArr_data.get(demoPresetSelect.getSelectedIndex()));
+    }//GEN-LAST:event_btn_demoPresetSelectActionPerformed
+
+    private void btn_code_gActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_code_gActionPerformed
+        System.out.println("生成代码...");
+        String code = "";
+        ArrayList<String> codeArr = new ArrayList<String>();
+        System.out.println("导入版本号设置..." + num_mcv.getText());
+        codeArr.add(num_mcv.getText());
+        System.out.println("生成区块设置...");
+        ArrayList<String> blockArr = new ArrayList<String>();
+        for (int i = 0; i < tempBlockData.size(); i++) {
+            String data = "";
+            String num = tempBlockNumber.get(i);
+            String nowSet = "";
+            if (sel_blockname.isSelected()) {
+                data = tempBlockData.get(i);
+                nowSet = addblocknum(num, data);
+                System.out.println("生成区块设置(名称模式)..." + nowSet);
+            } else {
+                data = tempBlockID.get(i);
+                nowSet = addblocknum(num, data);
+                System.out.println("生成区块设置(ID模式)..." + nowSet);
+            }
+            blockArr.add(0,nowSet);
+        }
+        String blocks = arr2str(blockArr,",");
+        System.out.println("完成区块设置..." + blocks);
+        codeArr.add(blocks);
+        
+        String biomeID = String.valueOf(biomeSelect.getSelectedIndex());
+        System.out.println("导入生物群系设置..." + biomeID);
+        codeArr.add(biomeID);
+        
+        System.out.println("生成环境设置...");
+        ArrayList<String> optionArr = new ArrayList<String>();
+        if (sel_village.isSelected()) {
+            String optstr = "village(size=" + num_village1.getText() + " distance=" + num_village2.getText() + ")";
+            if ("1".equals(num_village1.getText()) && "32".equals(num_village2.getText())) {
+                optstr = "village";
+            }
+            System.out.println("生成村庄设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_mineshaft.isSelected()) {
+            String optstr = "mineshaft(chance=" + num_mineshaft.getText() + ")";
+            if ("1".equals(num_mineshaft.getText())) {
+                optstr = "mineshaft";
+            }
+            System.out.println("生成废弃矿井设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_stronghold.isSelected()) {
+            String optstr = "stronghold(count=" + num_stronghold1.getText() + " distance=" + num_stronghold2.getText() + " spread=" + num_stronghold3.getText() + ")";
+            if ("3".equals(num_stronghold1.getText()) && "32".equals(num_stronghold2.getText()) && "3".equals(num_stronghold3.getText())) {
+                optstr = "stronghold";
+            }
+            System.out.println("生成要塞设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_biome.isSelected()) {
+            String optstr = "biome_1(distance=" + num_biome.getText() + ")";
+            if ("32".equals(num_biome.getText())) {
+                optstr = "biome_1";
+            }
+            System.out.println("生成生物群系特有结构设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_dungeon.isSelected()) {
+            String optstr = "dungeon";
+            System.out.println("生成地牢设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_decoration.isSelected()) {
+            String optstr = "decoration";
+            System.out.println("生成装饰设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_lake.isSelected()) {
+            String optstr = "lake";
+            System.out.println("生成湖设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_lava_lake.isSelected()) {
+            String optstr = "lava_lake";
+            System.out.println("生成岩浆湖设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        if (sel_oceanmonument.isSelected()) {
+            String optstr = "oceanmonument";
+            System.out.println("生成海底遗迹设置..." + optstr);
+            optionArr.add(optstr);
+        }
+        String options = arr2str(optionArr,",");
+        System.out.println("完成环境设置..." + options);
+        codeArr.add(options);
+        
+        String okstr = arr2str(codeArr,";");
+        System.out.println("完成代码生成..." + okstr);
+        txt_code.setText(okstr);
+    }//GEN-LAST:event_btn_code_gActionPerformed
+
+    private String arr2str (ArrayList<String> strarr, String breakcher) {
+        String str = "";
+        for (int i = 0; i < strarr.size(); i++) {
+            String nowstr = strarr.get(i);
+            if (i > 0) {
+                str = str + breakcher + nowstr;
+            } else {
+                str = nowstr;
+            }
+        }
+        return str;
+    }
+    
+    private int bool2int (Boolean b) {
+        if (b) {
+            return 1;
+        }
+        return 0;
+    }
+    
+    private String addblocknum(String num, String data) {
+        if ("1".equals(num)) {
+            return data;
+        } else {
+            return num + "*" + data;
+        }
+    }
+    
     private void btn_delEnable() {
         if (tempBlockID.size() > 1) {
             
@@ -661,26 +828,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox blockColorSelect;
     private javax.swing.JComboBox blockSelect;
     private javax.swing.JList blockSetting;
+    private javax.swing.JButton btn_code_g;
+    private javax.swing.JButton btn_code_l;
+    private javax.swing.JButton btn_copy;
     private javax.swing.JButton btn_del;
+    private javax.swing.JButton btn_demoPresetSelect;
     private javax.swing.JButton btn_insD;
     private javax.swing.JButton btn_insU;
+    private javax.swing.JButton btn_paste;
     private javax.swing.JComboBox demoPresetSelect;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -695,15 +852,26 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField num_biome;
+    private javax.swing.JTextField num_mcv;
+    private javax.swing.JTextField num_mineshaft;
+    private javax.swing.JTextField num_stronghold1;
+    private javax.swing.JTextField num_stronghold2;
+    private javax.swing.JTextField num_stronghold3;
+    private javax.swing.JTextField num_village1;
+    private javax.swing.JTextField num_village2;
+    private javax.swing.JCheckBox sel_biome;
+    private javax.swing.JCheckBox sel_blockname;
+    private javax.swing.JCheckBox sel_decoration;
+    private javax.swing.JCheckBox sel_dungeon;
+    private javax.swing.JCheckBox sel_lake;
+    private javax.swing.JCheckBox sel_lava_lake;
+    private javax.swing.JCheckBox sel_mineshaft;
+    private javax.swing.JCheckBox sel_oceanmonument;
+    private javax.swing.JCheckBox sel_selectall;
+    private javax.swing.JCheckBox sel_stronghold;
+    private javax.swing.JCheckBox sel_village;
     private javax.swing.JTextField txt_block_number;
+    private javax.swing.JTextField txt_code;
     // End of variables declaration//GEN-END:variables
 }
